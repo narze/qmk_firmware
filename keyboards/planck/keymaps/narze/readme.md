@@ -22,9 +22,10 @@ Press `S+D` simultaneously and hold, then...
 
 ## Build instructions
 - `cd /path/to/qmk_firmware`
+- Ensure latest libraries are loaded `make git-submodule`
 - Build with docker
-  - Planck Rev. 4 : `docker run -e keymap=narze -e subproject=rev4 -e keyboard=planck --rm -v $('pwd'):/qmk:rw edasque/qmk_firmware`
-  - Planck Light : `docker run -e keymap=narze -e keyboard=planck/light --rm -v $('pwd'):/qmk:rw edasque/qmk_firmware`
+  - Planck Rev. 4 : `util/docker_build.sh planck/rev4:narze`
+  - Planck Light : `util/docker_build.sh planck/light:narze`
 - Flash hex file
-  - Using dfu-programmer `dfu-programmer atmega32u4 erase && dfu-programmer atmega32u4 flash .build/planck_rev4_narze.hex`
+  - Using dfu-programmer `dfu-programmer atmega32u4 erase --force && dfu-programmer atmega32u4 flash .build/planck_rev4_narze.hex`
   - Use [QMK Toolbox](https://github.com/qmk/qmk_toolbox/releases)
