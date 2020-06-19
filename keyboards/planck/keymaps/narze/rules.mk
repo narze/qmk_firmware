@@ -5,7 +5,6 @@ EXTRAKEY_ENABLE = yes       # Audio control and System control(+450)
 CONSOLE_ENABLE = no         # Console for debug(+400)
 COMMAND_ENABLE = yes        # Commands for debug and configuration
 NKRO_ENABLE = yes           # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
-BACKLIGHT_ENABLE = yes      # Enable keyboard backlight functionality
 UNICODE_ENABLE = no         # Unicode
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 RGBLIGHT_ENABLE = no        # Enable WS2812 RGB underlight.
@@ -22,4 +21,12 @@ ifeq ($(strip $(KEYBOARD)), planck/rev4)
 else
     MOUSEKEY_ENABLE = yes
     MIDI_ENABLE = yes
+endif
+
+# Backlight does not work with rev6 yet
+ifeq ($(strip $(KEYBOARD)), planck/rev6)
+	BACKLIGHT_ENABLE = no
+else
+	# Enable keyboard backlight functionality
+	BACKLIGHT_ENABLE = yes       # Enable keyboard backlight functionality
 endif
