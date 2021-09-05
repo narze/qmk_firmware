@@ -6,6 +6,7 @@
 extern keymap_config_t keymap_config;
 
 enum ergodox_layers {
+    _THIRTYSIX,
     _QWERTY,
     _COLEMAK,
     _QWOC,
@@ -22,7 +23,8 @@ enum ergodox_layers {
 };
 
 enum ergodox_keycodes {
-    QWERTY = SAFE_RANGE,
+    THIRTYSIX = SAFE_RANGE,
+    QWERTY,
     COLEMAK,
     QWOC,
     LOWER,
@@ -91,6 +93,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_LALT,        CTL_T(KC_ESC),
              KC_PGUP,
              KC_PGDN,KC_BSPC, KC_ENT
+    ),
+/* ThirtySix
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |      |      |      |      |  Lwr |                                       | Rse  |      |      |      |       |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      |      |       |      |        |      |
+ *                                 | Space| Back |------|       |------| Back   |Enter |
+ *                                 |      | Space|      |       |      | Space  |      |
+ *                                 `--------------------'       `----------------------'
+ */
+[_THIRTYSIX] = LAYOUT_ergodox(
+        // left hand
+        XXXXXXX,         XXXXXXX,      XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,         KC_Q,         KC_W,   KC_E,   KC_R,   KC_T,   XXXXXXX,
+        XXXXXXX,         KC_A,         KC_S,   KC_D,   KC_F,   KC_G,
+        XXXXXXX,         LCTL_T(KC_Z),         LALT_T(KC_X),   LGUI_T(KC_C),   LSFT_T(KC_V),   KC_B,   XXXXXXX,
+        XXXXXXX,         XXXXXXX,      XXXXXXX,XXXXXXX,LOWER,
+                                                     XXXXXXX,  XXXXXXX,
+                                                               XXXXXXX,
+                                               KC_SPC,KC_TAB, XXXXXXX,
+        // right hand
+        XXXXXXX,   XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   XXXXXXX,
+                   KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,XXXXXXX,
+        XXXXXXX,   KC_N,   LSFT_T(KC_M),   LGUI_T(KC_COMM),  LALT_T(KC_DOT), LCTL_T(KC_SLSH),XXXXXXX,
+                           RAISE,  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+        XXXXXXX,   XXXXXXX,
+        XXXXXXX,
+        XXXXXXX,   KC_BSPC, KC_ENT
     ),
 /* Colemak
  *
@@ -437,7 +480,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // right hand
              _______, _______,  _______,   _______,  _______,   _______,   _______,
              _______, _______,  _______,   _______,  _______,   _______,   KC_DEL,
-                      AG_SWAP,  QWERTY,    COLEMAK,  QWOC,      PLOVER,    _______,
+                      AG_SWAP,  QWERTY,    THIRTYSIX,  QWOC,      PLOVER,    _______,
              _______, SDTOGG,   _______,   _______,  _______,   _______,   _______,
                                 _______,   _______,  _______,   _______,   BACKLIT,
              _______,        _______,
@@ -541,11 +584,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        case COLEMAK:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_COLEMAK);
+        // case COLEMAK:
+        //     if (record->event.pressed) {
+        //         set_single_persistent_default_layer(_COLEMAK);
 
-                set_superduper_key_combo_layer(_COLEMAK);
+        //         set_superduper_key_combo_layer(_COLEMAK);
+        //     }
+        //     return false;
+
+        case THIRTYSIX:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_THIRTYSIX);
+
+                set_superduper_key_combo_layer(_THIRTYSIX);
             }
             return false;
 

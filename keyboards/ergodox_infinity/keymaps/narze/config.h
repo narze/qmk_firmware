@@ -13,3 +13,5 @@
 #define MOUSEKEY_DELAY 100
 
 #define USB_POLLING_INTERVAL_MS 1
+
+#define EE_HANDS
