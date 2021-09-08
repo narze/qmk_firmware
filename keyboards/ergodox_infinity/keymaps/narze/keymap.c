@@ -730,6 +730,22 @@ void matrix_scan_user(void) {
   //   }
 }
 
+// Allow only thumb keys to hold on other key press
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(_LOWER, KC_TAB):
+        case KC_SPC:
+        case HPR_ESC:
+        case LT(_RAISE,KC_BSPC):
+        case ALL_T(KC_QUOT):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
+
 // Combos
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
