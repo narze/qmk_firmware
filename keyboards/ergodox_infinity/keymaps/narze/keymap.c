@@ -105,13 +105,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |Lwr/Tab|                                       |Rse/En|      |      |      |       |
+ *   |      |      |      |      |Lwr/Tab|                                      |Rse/Bk|      |      |      |       |
  *   `----------------------------------'                                        `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |Hyper/|      |       |      | Hyper/ |      |
- *                                 | Space| ESC  |------|       |------| Quote  | Bksp |
+ *                                 | Space| ESC  |------|       |------| Quote  | Enter|
  *                                 |      |      |      |       |      |        |      |
  *                                 `--------------------'       `----------------------'
  */
@@ -130,10 +130,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   XXXXXXX,
                    KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,XXXXXXX,
         XXXXXXX,   KC_N,   LSFT_T(KC_M),   LGUI_T(KC_COMM),  LALT_T(KC_DOT), LCTL_T(KC_SLSH),XXXXXXX,
-                           LT(_RAISE,KC_ENT),  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
+                           LT(_RAISE,KC_BSPC),  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         XXXXXXX,   XXXXXXX,
         XXXXXXX,
-        XXXXXXX,   ALL_T(KC_QUOT), KC_BSPC
+        XXXXXXX,   ALL_T(KC_QUOT), KC_ENT
     ),
 /* Colemak
  *
