@@ -110,7 +110,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |Hyper/|      |       |      | Hyper/ |      |
+ *                                 | Cmd/ |Hyper/|      |       |      | Hyper/ |Shift/|
  *                                 | Space| ESC  |------|       |------| Quote  | Enter|
  *                                 |      |      |      |       |      |        |      |
  *                                 `--------------------'       `----------------------'
@@ -124,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,         XXXXXXX,      XXXXXXX,XXXXXXX,LT(_LOWER, KC_TAB),
                                                      XXXXXXX,  XXXXXXX,
                                                                XXXXXXX,
-                                               KC_SPC,HPR_ESC, XXXXXXX,
+                                               LGUI_T(KC_SPC),HPR_ESC, XXXXXXX,
         // right hand
         XXXXXXX,   XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         XXXXXXX,   KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,   XXXXXXX,
@@ -133,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            LT(_RAISE,KC_BSPC),  XXXXXXX,XXXXXXX,XXXXXXX,XXXXXXX,
         XXXXXXX,   XXXXXXX,
         XXXXXXX,
-        XXXXXXX,   ALL_T(KC_QUOT), KC_ENT
+        XXXXXXX,   ALL_T(KC_QUOT), RSFT_T(KC_ENT)
     ),
 /* Colemak
  *
@@ -730,7 +730,7 @@ void matrix_scan_user(void) {
   //   }
 }
 
-// Allow only thumb keys to hold on other key press
+// Allow only thumb keys to hold on other key press (Except space)
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case LT(_LOWER, KC_TAB):
@@ -738,6 +738,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
         case HPR_ESC:
         case LT(_RAISE,KC_BSPC):
         case ALL_T(KC_QUOT):
+        case RSFT_T(KC_ENT):
             // Immediately select the hold action when another key is pressed.
             return true;
         default:
