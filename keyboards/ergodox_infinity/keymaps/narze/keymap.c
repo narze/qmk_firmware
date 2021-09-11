@@ -427,23 +427,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_MOUSE] = LAYOUT_ergodox(
         // left hand
-        _______, _______,  _______,   _______,   _______,   _______,   _______,
-        _______, _______,  _______,   _______,   _______,   _______,   _______,
-        _______, _______,  _______,   KC_BTN1,   KC_BTN2,   _______,
-        _______, _______,  LGUI(KC_X),LGUI(KC_C),LGUI(KC_V),   _______,   _______,
-        _______, _______,  _______,   _______,   _______,
-                                                    _______,  _______,
-                                                              _______,
-                                               _______,_______,_______,
+        XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+        XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,   XXXXXXX,
+        XXXXXXX, XXXXXXX,  XXXXXXX,   KC_BTN1,   KC_BTN2,   XXXXXXX,
+        XXXXXXX, XXXXXXX,  LGUI(KC_X),LGUI(KC_C),LGUI(KC_V),   XXXXXXX,   XXXXXXX,
+        XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+                                                    XXXXXXX,  XXXXXXX,
+                                                              XXXXXXX,
+                                               XXXXXXX,XXXXXXX,XXXXXXX,
         // right hand
-             _______, _______,  _______,   _______,  _______,   _______,   _______,
-             _______, _______,  KC_BTN1,   KC_MS_U,  KC_BTN2,   _______,   _______,
-                      _______,  KC_MS_L,   KC_MS_D,  KC_MS_R,   _______,    _______,
-             _______, _______,  KC_WH_D,   KC_WH_U,  _______,   _______,   _______,
-                                KC_BTN1,   _______,  _______,   _______,   _______,
-             _______,        _______,
-             _______,
-             _______,KC_MS_ACCEL0, KC_MS_ACCEL1
+             XXXXXXX, XXXXXXX,  XXXXXXX,   XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+             XXXXXXX, XXXXXXX,  KC_BTN1,   KC_MS_U,  KC_BTN2,   XXXXXXX,   XXXXXXX,
+                      XXXXXXX,  KC_MS_L,   KC_MS_D,  KC_MS_R,   XXXXXXX,    XXXXXXX,
+             XXXXXXX, XXXXXXX,  KC_WH_D,   KC_WH_U,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+                                KC_BTN1,   XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX,
+             XXXXXXX,        XXXXXXX,
+             XXXXXXX,
+             XXXXXXX,KC_MS_ACCEL0, KC_MS_ACCEL1
     ),
 
 /* Adjust (Lower + Raise)
