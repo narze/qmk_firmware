@@ -353,6 +353,21 @@ void matrix_setup(void) {
 void matrix_scan_user(void) {
 }
 
+// Allow only thumb keys to hold on other key press (Except space)
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(_RAISE, KC_LBRC):
+        case GUI_UNDS:
+        case ALT_COLN:
+        case LT(_LOWER, KC_RBRC):
+            // Immediately select the hold action when another key is pressed.
+            return true;
+        default:
+            // Do not select the hold action when another key is pressed.
+            return false;
+    }
+}
+
 void process_combo_event(uint16_t combo_index, bool pressed) {
     if (pressed) {
         switch(combo_index) {
