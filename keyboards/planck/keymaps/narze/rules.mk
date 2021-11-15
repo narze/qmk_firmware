@@ -16,6 +16,10 @@ SLEEP_LED_ENABLE = no    # Breathing sleep LED during USB suspend
 
 COMBO_ENABLE = yes
 
+# Fix unresponsive planck after some time
+NO_SUSPEND_POWER_DOWN = yes
+NO_USB_STARTUP_CHECK = yes
+
 ifeq ($(strip $(KEYBOARD)), planck/rev4)
 	MOUSEKEY_ENABLE = no
 	MIDI_ENABLE = no
