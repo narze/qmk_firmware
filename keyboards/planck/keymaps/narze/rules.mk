@@ -18,7 +18,13 @@ COMBO_ENABLE = yes
 
 # Fix unresponsive planck after some time
 NO_SUSPEND_POWER_DOWN = yes
-NO_USB_STARTUP_CHECK = yes
+
+ifeq ($(strip $(KEYBOARD)), planck/light)
+	# Don't redefine for Planck Light
+else
+	NO_USB_STARTUP_CHECK = yes
+endif
+
 
 ifeq ($(strip $(KEYBOARD)), planck/rev4)
 	MOUSEKEY_ENABLE = no
