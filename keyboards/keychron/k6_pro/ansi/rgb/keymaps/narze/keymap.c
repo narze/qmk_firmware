@@ -28,6 +28,11 @@ enum layers{
   _SUPERDUPER,
 };
 
+enum custom_keycodes {
+    // Offset by 12 to prevent conflict with default keychron keycodes
+    GUI_UNDS = SAFE_RANGE + 12,
+};
+
 enum process_combo_event {
     CB_SUPERDUPER,
 };
@@ -37,14 +42,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      XXXXXXX,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC, RGB_MOD,
      KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS, KC_HOME,
      HPR_ESC,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,  KC_PGUP,
-     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   LT(_MOUSE, KC_SLSH),  KC_RSFT,  KC_UP,    KC_PGDN,
-     KC_LCTL,  KC_LOPTN, KC_LCMMD,                               KC_SPC,                       KC_BSPC,MO(MAC_FN1),MO(FN2), KC_LEFT,  KC_DOWN, KC_RGHT),
+     KC_LSPO,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   LT(_MOUSE, KC_SLSH),  KC_RSPC,  KC_UP,    KC_PGDN,
+     KC_LCTL,  KC_LOPTN, GUI_UNDS,                               KC_SPC,                       KC_BSPC,MO(MAC_FN1),MO(FN2), KC_LEFT,  KC_DOWN, KC_RGHT),
 
 [WIN_BASE] = LAYOUT_ansi_68(
      KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC, RGB_MOD,
      KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS, KC_HOME,
      HPR_ESC,  KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,            KC_ENT,  KC_PGUP,
-     KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   LT(_MOUSE, KC_SLSH),  KC_RSFT,  KC_UP,    KC_PGDN,
+     KC_LSPO,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   LT(_MOUSE, KC_SLSH),  KC_RSPC,  KC_UP,    KC_PGDN,
      KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                       KC_BSPC, MO(WIN_FN1),MO(FN2), KC_LEFT,  KC_DOWN, KC_RGHT),
 
 [MAC_FN1] = LAYOUT_ansi_68(
@@ -83,6 +88,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      _______,  _______,  _______,                                KC_LSFT,                      _______,  _______,  _______,  _______,  _______,  _______),
 };
 
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // case QWERTY:
+        //     if (record->event.pressed) {
+        //         set_single_persistent_default_layer(_QWERTY);
+
+        //         set_superduper_key_combo_layer(_QWERTY);
+        //     }
+        //     return false;
+
+        // case COLEMAK:
+        //     if (record->event.pressed) {
+        //         set_single_persistent_default_layer(_COLEMAK);
+
+        //         set_superduper_key_combo_layer(_COLEMAK);
+        //     }
+        //     return false;
+
+        // case QWOC:
+        //     if (record->event.pressed) {
+        //         set_single_persistent_default_layer(_QWOC);
+
+        //         set_superduper_key_combo_layer(_QWOC);
+        //     }
+        //     return false;
+
+        // case SDTOGG:
+        //     if (record->event.pressed) {
+        //         toggle_superduper_mode();
+        //     }
+        //     return false;
+
+        // // Macros
+
+        // // 1. Hold for LGUI, tap for Underscore
+        case GUI_UNDS:
+            perform_space_cadet(record, keycode, KC_LGUI, KC_LSFT, KC_MINS);
+            return false;
+
+        default:
+            return true;
+    }
+    return true;
+}
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
     if (pressed) {
