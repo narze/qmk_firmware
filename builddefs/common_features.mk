@@ -222,11 +222,16 @@ else
         # True EEPROM on STM32L0xx, L1xx
         OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L0_L1
         SRC += eeprom_driver.c eeprom_stm32_L0_L1.c
+      else ifneq ($(filter $(MCU_SERIES),STM32L4xx),)
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_STM32_L4
+        COMMON_VPATH += $(DRIVER_PATH)/eeprom
+        SRC += eeprom_driver.c
+        SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32_l4.c
+        SRC += $(PLATFORM_COMMON_DIR)/flash_stm32.c
       else ifneq ($(filter $(MCU_SERIES),RP2040),)
-		# Wear-leveling EEPROM implementation, backed by RP2040 flash
-		OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
-		SRC += eeprom_driver.c eeprom_wear_leveling.c
-        WEAR_LEVELING_DRIVER = rp2040_flash
+        # Wear-leveling EEPROM implementation, backed by RP2040 flash
+        OPT_DEFS += -DEEPROM_DRIVER -DEEPROM_WEAR_LEVELING
+        SRC += eeprom_driver.c eeprom_wear_leveling.c
       else ifneq ($(filter $(MCU_SERIES),KL2x K20x),)
         # Teensy EEPROM implementations
         OPT_DEFS += -DEEPROM_TEENSY
@@ -271,7 +276,7 @@ ifneq ($(strip $(WEAR_LEVELING_DRIVER)),none)
       POST_CONFIG_H += $(DRIVER_PATH)/wear_leveling/wear_leveling_flash_spi_config.h
     else ifeq ($(strip $(WEAR_LEVELING_DRIVER)), rp2040_flash)
       SRC += wear_leveling_rp2040_flash.c
-      POST_CONFIG_H += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_PATH)/wear_leveling/wear_leveling_rp2040_flash_config.h
+      POST_CONFIG_H += $(DRIVER_PATH)/wear_leveling/wear_leveling_rp2040_flash_config.h
     else ifeq ($(strip $(WEAR_LEVELING_DRIVER)), legacy)
       COMMON_VPATH += $(PLATFORM_PATH)/$(PLATFORM_KEY)/$(DRIVER_DIR)/flash
       SRC += flash_stm32.c wear_leveling_legacy.c
