@@ -25,6 +25,11 @@ enum layers{
   WIN_FN1,
   FN2,
   _MOUSE,
+  _SUPERDUPER,
+};
+
+enum process_combo_event {
+    CB_SUPERDUPER,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -69,4 +74,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_MS_L, KC_MS_D, KC_MS_R,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_WH_D, KC_WH_U,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
      XXXXXXX,  XXXXXXX,  XXXXXXX,                                KC_BTN1,                      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX),
+
+[_SUPERDUPER] = LAYOUT_ansi_68(
+     _______,  _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,   _______,   _______,   _______,  _______,
+     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  S(LGUI(KC_LBRC)), S(LGUI(KC_RBRC)),  _______,  _______,  _______,  _______,  _______,
+     _______,  KC_LALT,  _______,  _______,  KC_BSPC,  KC_LGUI,  KC_LEFT,  KC_DOWN,  KC_UP,    KC_RGHT,  KC_DEL,  _______,            _______,  _______,
+     _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______, _______,  _______,  _______,  _______,  _______,  _______,
+     _______,  _______,  _______,                                KC_LSFT,                      _______,  _______,  _______,  _______,  _______,  _______),
 };
+
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    if (pressed) {
+        switch(combo_index) {
+            case CB_SUPERDUPER:
+                layer_on(_SUPERDUPER);
+                break;
+        }
+    } else {
+        layer_off(_SUPERDUPER);
+        unregister_mods(MOD_BIT(KC_LGUI) | MOD_BIT(KC_LCTL) | MOD_BIT(KC_LALT)); // Sometimes mods are held, unregister them
+    }
+}
