@@ -29,8 +29,7 @@ enum layers{
 };
 
 enum custom_keycodes {
-    // Offset by 12 to prevent conflict with default keychron keycodes
-    GUI_UNDS = SAFE_RANGE + 12,
+    GUI_UNDS
 };
 
 enum process_combo_event {
