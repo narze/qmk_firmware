@@ -1,0 +1,2 @@
+#define COMBO_COUNT 1
+#define USB_POLLING_INTERVAL_MS 1

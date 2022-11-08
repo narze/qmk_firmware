@@ -168,8 +168,7 @@ endef
 hid_bootloader: $(BUILD_DIR)/$(TARGET).hex check-size cpfirmware
 	$(call EXEC_HID_LUFA)
 
-flash: $(BUILD_DIR)/$(TARGET).hex check-size cpfirmware
-	$(SILENT) || printf "Flashing for bootloader: $(BLUE)$(BOOTLOADER)$(NO_COLOR)\n"
+flash:  $(BUILD_DIR)/$(TARGET).hex check-size cpfirmware
 ifneq ($(strip $(PROGRAM_CMD)),)
 	$(UNSYNC_OUTPUT_CMD) && $(PROGRAM_CMD)
 else ifeq ($(strip $(BOOTLOADER)), caterina)
