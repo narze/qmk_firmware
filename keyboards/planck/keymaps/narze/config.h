@@ -28,10 +28,23 @@
 
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 
 #define SUPER_DUPER_SOUND S__NOTE(_B1)
 
-#define MOUSEKEY_DELAY 100
+#ifdef MOUSEKEY_ENABLE
+    #undef MOUSEKEY_DELAY
+    #define MOUSEKEY_DELAY 8
+
+    // #define MK_KINETIC_SPEED
+    // #define MOUSEKEY_MOVE_DELTA 10
+    // #define MOUSEKEY_INITIAL_SPEED 20
+    // #define MOUSEKEY_ACCELERATED_SPEED 1000
+    // #define MOUSEKEY_MOVE_MAX 40
+
+    #define MK_KINETIC_SPEED // Enable Kinetic mode:  Uses a quadratic curve on cursor speed to allow precise movements at the beginning and increases speed thereafter.
+    #define MOUSEKEY_INTERVAL 13     
+#endif
 
 #define USB_POLLING_INTERVAL_MS 1
 
